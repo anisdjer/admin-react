@@ -5,6 +5,7 @@ import '../styles/posts-list.scss'
 
 export default class PostList extends React.Component {
   render() {
+
     let postList = [
       {
         id: 'rrrr',

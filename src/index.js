@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import store from './store'
@@ -10,11 +11,13 @@ import './index.scss';
 window.store = store;
 
 ReactDOM.render(
+    <Provider store={store}>
         <Router>
             <div>
                 <Navbar />
                 <Route exact strict path="/" component={PostList}/>
             </div>
-        </Router>,
+        </Router>
+    </Provider>,
     document.getElementById('app')
 );
