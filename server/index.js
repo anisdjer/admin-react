@@ -42,6 +42,7 @@ app.post('/security/login', security.login);
 
 app.use('/api', /*security.auth,*/ routing());
 
+/*
 app.get('/security/*', (req, res, next) => {
   if (req.user) {
     res.redirect('/');
@@ -62,5 +63,5 @@ app.use('/static', express.static('public/app-security/build/static'));
 app.use('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../public/app-react/public/404.html'));
 });
-
+*/
 app.listen(3000, () => console.log('Server running http://localhost:3000'));
