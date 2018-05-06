@@ -5,7 +5,7 @@ import '../styles/posts-list.scss'
 
 export default class PostList extends React.Component {
   handleLoad() {
-    this.props.fetchPosts();
+    this.props.fetchPosts(this.refs.userId.value);
   }
   render() {
     let {data: postList} = this.props.posts;
@@ -27,7 +27,7 @@ export default class PostList extends React.Component {
     return (
       <div className="container posts-list">
         <h1>Blog</h1>
-        <button onClick={this.handleLoad.bind(this)}>Load Data</button>
+        <input type="number" ref="userId" defaultValue="1"/><button onClick={this.handleLoad.bind(this)}>Load Data</button>
         <ul className="container">
           {posts}
         </ul>
