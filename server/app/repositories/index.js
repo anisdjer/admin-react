@@ -1,5 +1,5 @@
 const db = require('../../db');
 const Sequelize = require('sequelize');
 
-module.exports.userRepository = require('./user');
-module.exports.tweetRepository = require('./tweet');
+module.exports.user = require('./user');
+module.exports.tweet = require('./tweet');

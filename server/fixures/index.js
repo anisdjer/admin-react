@@ -16,7 +16,7 @@ tweetRepo.sync({force: true})
       .then(() => {
         for(let j = 1; j <= 20; j += 1) {
           tweetRepo.create({
-            userId: 1,
+            userId: i,
             body: `Tweet ${j} of user Anis ${i}`
           });
         }

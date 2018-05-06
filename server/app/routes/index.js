@@ -1,7 +1,15 @@
 const ModelRoute = require('./model-route');
 const {repositoryBinding} = require('../../utils')
-const {userRepository, tweetRepository} = require('../repositories');
-const {userSerializer, tweetSerializer} = require('../serializers');
+const repositories = require('../repositories');
+const serializers = require('../serializers');
 
-module.exports.user = repositoryBinding(new ModelRoute(userRepository, userSerializer));
-module.exports.tweet = repositoryBinding(new ModelRoute(tweetRepository, tweetSerializer));
+const repositoryFactory = (name) => {
+  return repositories[name];
+}
+
+const serializerFactory = (name) => {
+  return serializers[name] || new serializers.DefaultSerializer();
+}
+
+module.exports.user = repositoryBinding(new ModelRoute('user', repositoryFactory, serializerFactory));
+module.exports.tweet = repositoryBinding(new ModelRoute('tweet', repositoryFactory, serializerFactory));

@@ -1,9 +1,10 @@
-const DefaultSerializer = require('../serializers/default-serializer');
-
 module.exports = class ModelRoute {
-    constructor(repository, serializer) {
-        this.repository = repository;
-        this.serializer = serializer || new DefaultSerializer();
+    constructor(name, repositoryFactory, serializerFactory) {
+        this.name = name;
+        this.repositoryFactory = repositoryFactory;
+        this.serializerFactory = serializerFactory;
+        this.repository = repositoryFactory(name);
+        this.serializer = serializerFactory(name);
     }
 
     getAll(req, res, next) {
@@ -66,5 +67,23 @@ module.exports = class ModelRoute {
                 }
             })
             .catch(() => res.status(400).end())
+    }
+
+    getAssociation(associationName) {
+        return (req, res, next) => {
+            this.repositoryFactory(associationName).findAll({
+                where: {
+                    [this.name + 'Id']: req.params.id
+                }
+            })
+                .then(users => {
+                    if (users !== null) {
+                        res.json(this.serializerFactory(associationName).serialize(users))
+                    } else {
+                        res.status(404).end()
+                    }
+                })
+                .catch(() => res.status(400).end())
+        }
     }
 }
