@@ -5,10 +5,12 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import store from './store'
 import Navbar from './components/Navbar';
-import PostList from './components/PostList';
+import PostList from './containers/PostList';
+import {fetchPosts} from './actions/post'
 import './index.scss';
 
 window.store = store;
+window.fetchPosts = fetchPosts;
 
 ReactDOM.render(
     <Provider store={store}>

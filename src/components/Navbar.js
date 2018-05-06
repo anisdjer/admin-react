@@ -10,8 +10,8 @@ export default class Navbar extends React.Component {
             <a className="navbar-brand" href="#">Admin</a>
             <div>
                 <div className="navbar-nav">
-                    <NavLink className="nav-item nav-link" activeClassName="active" exact to="/">Home</NavLink>
-                    <NavLink className="nav-item nav-link" activeClassName="active" exact to="/posts">Posts</NavLink>
+                    <NavLink className="nav-item nav-link" exact to="/">Home</NavLink>
+                    <NavLink className="nav-item nav-link" exact to="/posts">Posts</NavLink>
                 </div>
             </div>
         </nav>

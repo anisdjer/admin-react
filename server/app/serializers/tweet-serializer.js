@@ -1,0 +1,17 @@
+var apiSerializer = require('jsonapi-serializer');
+
+let serializer = new apiSerializer.Serializer('tweet', {
+    attributes: ['userId', 'body', 'createdAt', 'updatedAt'],
+    keyForAttribute: 'snake_case',
+    pluralizeType: false
+});
+
+let deserializer = new apiSerializer.Deserializer({
+    keyForAttribute: 'camelCase'
+});
+
+module.exports.serialize = serializer.serialize.bind(serializer);
+module.exports.deserialize = deserializer.deserialize.bind(deserializer);
+module.exports.error = function (options) {
+    return new apiSerializer.Error(options);
+};

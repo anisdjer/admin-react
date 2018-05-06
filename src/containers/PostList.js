@@ -4,8 +4,7 @@ import {fetchPosts} from '../actions/post'
 import { bindActionCreators } from 'redux';
 
 const mapStateToProps = (state) =>  ({posts: state.post});
-const mapDispatchToProps = (dispatch) =>  ({
-  fetchPosts: fetchPosts(dispatch)
-});
+
+const mapDispatchToProps = (dispatch) =>  bindActionCreators({fetchPosts}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);
