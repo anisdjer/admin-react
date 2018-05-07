@@ -24,7 +24,7 @@ export default class PostList extends React.Component {
             </NavLink>
           </p>
           <p className="post-body">
-            {post.attributes.body}
+            {post.body}
           </p>
         </li>
       );
