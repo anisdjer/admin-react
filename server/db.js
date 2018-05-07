@@ -9,7 +9,7 @@ module.exports = new Sequelize('database', 'username', 'password', {
       acquire: 30000,
       idle: 10000
     },
-    logging: true,
+    logging: console.log,
     // SQLite only
     storage: 'data/database.sqlite'
   });

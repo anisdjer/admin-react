@@ -4,6 +4,11 @@ import { NavLink } from 'react-router-dom';
 import '../styles/posts-list.scss'
 
 export default class PostList extends React.Component {
+  /*constructor(props) {
+    super(props);
+
+    this.props = {...props, posts: {data: []}};
+  }*/
   handleLoad() {
     this.props.fetchPosts(this.refs.userId.value);
   }
