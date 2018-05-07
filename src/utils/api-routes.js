@@ -1,6 +1,6 @@
-import RouteGenretaor from 'route-generator'
+import RouteGenerator from 'route-generator'
 
-const apiRoutes = new RouteGenretaor({
+const apiRoutes = new RouteGenerator({
   schema: 'http',
   host: 'localhost:3000',
   prefix: 'api'
