@@ -16,7 +16,7 @@ const security = require('./app/security');
 const app = express();
 
 // create a write stream (in append mode)
-var accessLogStream = fs.createWriteStream(path.join(__dirname, '../logs/access.log'))
+var accessLogStream = fs.createWriteStream(path.join(__dirname, '../logs/access-' + (new Date()).toISOString() + '.log'))
 
 morgan.token('id', function getId (req) {
   return req.id

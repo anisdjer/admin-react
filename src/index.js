@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import store from './store'
-import Navbar from './components/Navbar';
+import Navbar from './containers/Navbar';
 import PostList from './containers/PostList';
 import {fetchPosts} from './actions/post'
 import './index.scss';

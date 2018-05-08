@@ -4,14 +4,11 @@ import { NavLink } from 'react-router-dom';
 import '../styles/posts-list.scss'
 
 export default class PostList extends React.Component {
-  /*constructor(props) {
-    super(props);
 
-    this.props = {...props, posts: {data: []}};
-  }*/
-  handleLoad() {
-    this.props.fetchPosts(this.refs.userId.value);
+  componentDidMount() {
+    this.props.fetchPosts(this.props.user.id);
   }
+  
   render() {
     let {data: postList} = this.props.posts;
 
@@ -19,8 +16,8 @@ export default class PostList extends React.Component {
       return (
         <li className="post-item"  key={post.id}>
           <p className="post-title">
-            <NavLink exact to={`/posts/${post.id}`}>
-              {post.title}
+            <NavLink to={`/posts/${post.id}`}>
+              Le {(new Date(post.created_at)).toLocaleString()}
             </NavLink>
           </p>
           <p className="post-body">
@@ -30,10 +27,9 @@ export default class PostList extends React.Component {
       );
     });
     return (
-      <div className="container posts-list">
-        <h1>Blog</h1>
-        <input type="number" ref="userId" defaultValue="1"/><button onClick={this.handleLoad.bind(this)}>Load Data</button>
-        <ul className="container">
+      <div className="container">
+        <h2>Tweets</h2>
+        <ul className="posts-list">
           {posts}
         </ul>
       </div>

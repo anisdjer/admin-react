@@ -1,23 +1,14 @@
 .posts-list {
-  margin: 50px 50px;
-/*
-  .post-item {
-    margin: 50px 0;
+  margin: 50px 0;
 
+  .post-item {
     .post-title {
-      // padding-left: 100px;
-      padding-bottom: 50px;
-      color: #333;
-      // font-size: 2em;
-      
-      a {
-        text-decoration: none;
-      }
+      display: inline-block;
     }
-  
+
     .post-body {
-      font-size: 1.5em;
+      margin-left: 20px;
+      display: inline-block;
     }
   }
-*/
 }
