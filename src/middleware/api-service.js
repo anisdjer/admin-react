@@ -1,11 +1,11 @@
-import { FETCH_API, FETCH_POSTS_FULLFILLED } from "../constants";
 import Axios from "axios";
+import { FETCH_API } from "../constants";
 import apiRoutes from '../utils/api-routes';
 import apiModelFactory from '../utils/api-model-factory';
 
 export const apiServiceMiddleware = store => next => action => {
   if (action.type === FETCH_API && action.route) {
-    Axios.get(apiRoutes.generateRoute(action.route, action.routeParams || {}))
+    Axios[action.method || 'get'](apiRoutes.generateRoute(action.route, action.routeParams || {}), action.body || {})
       .then(res => {
         let result = res.data.data,
           payload;
@@ -16,10 +16,7 @@ export const apiServiceMiddleware = store => next => action => {
           payload = apiModelFactory(result);
         }
 
-        next({
-          type: FETCH_POSTS_FULLFILLED,
-          payload
-        })
+        action.callback && action.callback(payload)
       })
   } else {
     next(action);

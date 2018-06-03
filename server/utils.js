@@ -6,6 +6,6 @@ function es6BindAll(context, methodNames) {
     return context;
 };
 
-module.exports.repositoryBinding = function repositoryBinding(repository) {
+module.exports.contextBinding = function repositoryBinding(repository) {
     return es6BindAll(repository, ['getAll', 'getOne', 'create', 'update', 'delete'])
 };

@@ -8,6 +8,6 @@ const Tweet = db.define('tweet', {
   }
 });
 
-Tweet.belongsTo(require('./user'))
+Tweet.belongsTo(require('./user'), {foreignKey: 'userId', targetKey: 'id'})
 
 module.exports = Tweet;

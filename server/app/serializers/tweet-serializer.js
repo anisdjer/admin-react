@@ -1,8 +1,8 @@
 var apiSerializer = require('jsonapi-serializer');
 
 let serializer = new apiSerializer.Serializer('tweet', {
-    attributes: ['userId', 'body', 'createdAt', 'updatedAt'],
-    keyForAttribute: 'snake_case',
+    attributes: ['body', 'createdAt', 'updatedAt', 'user'],
+    keyForAttribute: 'camelCase',
     pluralizeType: false
 });
 

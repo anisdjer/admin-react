@@ -1,16 +1,21 @@
+import { FETCH_USERS_FULLFILLED } from "../constants";
+
 const initialState = {
-  id: undefined,
-  username: undefined,
-  first_name: undefined,
-  last_name: undefined,
-  created_at: undefined,
-  updated_at: undefined
+  user : {
+    id: undefined,
+    username: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    createdAt: undefined,
+    updatedAt: undefined
+  },
+  list: []
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN_USER':
-      return {...state};
+    case FETCH_USERS_FULLFILLED:
+      return {...state, list: action.payload};
     default:
       return state;
   }

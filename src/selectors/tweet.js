@@ -1,0 +1,1 @@
+export const selectTweet = (state = {}) => state.tweet;

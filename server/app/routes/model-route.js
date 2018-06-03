@@ -1,14 +1,16 @@
 module.exports = class ModelRoute {
-    constructor(name, repositoryFactory, serializerFactory) {
+    constructor(name, repositoryFactory, serializerFactory, relations = []) {
         this.name = name;
         this.repositoryFactory = repositoryFactory;
         this.serializerFactory = serializerFactory;
+        this.relations = relations.map(model => repositoryFactory(model));
+        
         this.repository = repositoryFactory(name);
         this.serializer = serializerFactory(name);
     }
 
     getAll(req, res, next) {
-        this.repository.findAll()
+        this.repository.findAll({include: this.relations})
             .then(users => {
                 if (users !== null) {
                     res.json(this.serializer.serialize(users))
@@ -20,7 +22,7 @@ module.exports = class ModelRoute {
     }
 
     getOne(req, res, next) {
-        this.repository.findOne({ where: {id: req.params.id}})
+        this.repository.findOne({ where: {id: req.params.id}, include: this.relations})
             .then(user => {
                 if (user) {
                     res.json(this.serializer.serialize(user))
@@ -28,7 +30,7 @@ module.exports = class ModelRoute {
                     res.status(404).json(this.serializer.error({status: 404}))
                 }
             })
-            .catch(() => res.status(400).json(this.serializer.error({status: 400})))
+            .catch((e) => res.status(400).json({status: 400, m: e.message}))
     }
 
     create(req, res, next) {
@@ -41,19 +43,16 @@ module.exports = class ModelRoute {
     }
 
     update(req, res, next) {
-        let newUser = req.body;
-        newUser.id = undefined;
-
         this.repository.findOne({ where: {id: req.params.id}})
             .then(user => {
                 if (user) {
-                    user.updateAttributes(this.serializer.serialize(newUser));
-                    res.json(user);
+                    user.update({...req.body, id: undefined});
+                    res.json(user)
                 } else {
                     res.status(404).end();
                 }
             })
-            .catch(() => res.status(400).end())
+            .catch((e) => res.status(400).json(e.message))
     }
 
     delete(req, res, next) {
@@ -74,7 +73,8 @@ module.exports = class ModelRoute {
             this.repositoryFactory(associationName).findAll({
                 where: {
                     [this.name + 'Id']: req.params.id
-                }
+                },
+                include: this.relations.concat(this.repository)
             })
                 .then(users => {
                     if (users !== null) {

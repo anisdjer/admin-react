@@ -7,8 +7,11 @@ import { apiServiceMiddleware } from '../middleware/api-service';
 import User from '../models/User'
 
 const initialState = {
-  post: {loading: false, data: []},
-  user: new User({id: 1, username: 'Test'})
+  tweet: {loading: false, data: []},
+  user: {
+    user : new User({id: 2, username: 'Test 2'}),
+    list : []
+  }
 };
 
 const store = createStore(
@@ -20,7 +23,7 @@ const store = createStore(
 /*
 store.subscribe(() => {
   let storeState = store.getState(),
-    state = {...storeState, post: {...storeState.post, data: [storeState.post.data[0] || undefined]}};
+    state = {...storeState, tweet: {...storeState.post, data: storeState.tweet.data || []}};
 
   window.localStorage.setItem('admin', JSON.stringify(state))
 });

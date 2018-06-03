@@ -2,7 +2,7 @@ var apiSerializer = require('jsonapi-serializer');
 
 let serializer = new apiSerializer.Serializer('user', {
     attributes: ['username', 'firstName', 'lastName', 'createdAt', 'updatedAt'],
-    keyForAttribute: 'snake_case',
+    keyForAttribute: 'camelCase',
     pluralizeType: false
 });
 

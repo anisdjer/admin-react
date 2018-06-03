@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import post from './post';
+import tweet from './tweet';
 import user from './user';
 
 export default combineReducers({
-  post,
+  tweet,
   user
 });

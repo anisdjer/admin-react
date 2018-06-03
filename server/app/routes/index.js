@@ -1,5 +1,5 @@
 const ModelRoute = require('./model-route');
-const {repositoryBinding} = require('../../utils')
+const { contextBinding } = require('../../utils')
 const repositories = require('../repositories');
 const serializers = require('../serializers');
 
@@ -11,5 +11,16 @@ const serializerFactory = (name) => {
   return serializers[name] || new serializers.DefaultSerializer();
 }
 
-module.exports.user = repositoryBinding(new ModelRoute('user', repositoryFactory, serializerFactory));
-module.exports.tweet = repositoryBinding(new ModelRoute('tweet', repositoryFactory, serializerFactory));
+let routes = {};
+
+// automate this
+[{
+  name: 'tweet',
+  relations: ['user']
+}, {
+  name: 'user'
+}].forEach(model => {
+  routes[model.name] = contextBinding(new ModelRoute(model.name, repositoryFactory, serializerFactory, model.relations));
+})
+
+module.exports = routes;
